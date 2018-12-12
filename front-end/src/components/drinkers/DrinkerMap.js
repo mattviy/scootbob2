@@ -10,13 +10,12 @@ const {
 } = require("react-google-maps");
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
-
 const DrinkerMap = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCBPsUBhfOYqXts2pqPEDsbnV2gvcCGXJE&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100vh` }} />,
     containerElement: <div style={{ height: `100vh` }} />,
-    mapElement: <div style={{ height: `100vh` }} />,
+    mapElement: <div style={{ height: `100vh`}} />,
   }),
   withScriptjs,
   withGoogleMap,
@@ -283,57 +282,59 @@ const DrinkerMap = compose(
       ]
     }}
     >
-      <SearchBox
-          ref={props.onSearchBoxMounted}
-          bounds={props.bounds}
-          controlPosition={google.maps.ControlPosition.TOP_LEFT}
-          onPlacesChanged={props.onPlacesChanged}
-        >
-          <input
-            type="text"
-            placeholder="Origin"
-            style={{
-              boxSizing: `border-box`,
-              border: `1px solid transparent`,
-              width: `80%`,
-              height: `32px`,
-              marginTop: `27px`,
-              padding: `0 12px`,
-              borderRadius: `3px`,
-              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-              fontSize: `14px`,
-              outline: `none`,
-              textOverflow: `ellipses`,
-            }}
-          />
-        </SearchBox>
-        
+  
         <SearchBox
-          ref={props.onSearchBoxMounted}
-          bounds={props.bounds}
-          controlPosition={google.maps.ControlPosition.TOP_LEFT}
-          onPlacesChanged={props.onPlacesChanged}
-        >
-          <input
-            type="text"
-            placeholder="Destination"
-            style={{ 
-              boxSizing: `border-box`,
-              border: `1px solid transparent`,
-              width: `80%`,
-              height: `32px`,
-              marginTop: `27px`,
-              padding: `0 12px`,
-              borderRadius: `3px`,
-              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
-              fontSize: `14px`,
-              outline: `none`,
-              textOverflow: `ellipses`,
-            }}
-          />
-        </SearchBox>
-        
+            ref={props.onSearchBoxMounted}
+            bounds={props.bounds}
+            controlPosition={google.maps.ControlPosition.TOP_LEFT}
+            onPlacesChanged={props.onPlacesChanged}
+          >
+            <input
+              type="text"
+              placeholder="Origin"
+              style={{
+                boxSizing: `border-box`,
+                border: `1px solid transparent`,
+                width: `90%`,
+                height: `40px`,
+                marginLeft: `5%`,
+                marginTop: `60px`,
+                padding: `0 12px`,
+                borderRadius: `3px`,
+                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                fontSize: `16px`,
+                outline: `none`,
+                textOverflow: `ellipses`,
+              }}
+            />
+          </SearchBox>
     
+          <SearchBox
+            ref={props.onSearchBoxMounted}
+            bounds={props.bounds}
+            controlPosition={google.maps.ControlPosition.TOP_RIGHT}
+            onPlacesChanged={props.onPlacesChanged}
+          >
+            <input
+              type="text"
+              placeholder="Destination"
+              style={{
+                boxSizing: `border-box`,
+                border: `1px solid transparent`,
+                width: `90%`,
+                height: `40px`,
+                marginRight: `5%`,
+                marginTop: `120px`,
+                padding: `0 12px`,
+                borderRadius: `3px`,
+                boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+                fontSize: `16px`,
+                outline: `none`,
+                textOverflow: `ellipses`,
+              }}
+            />
+          </SearchBox>
+          
     {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
 );

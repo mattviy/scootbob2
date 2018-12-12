@@ -3,7 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import DrinkerMap from './components/drinkers/DrinkerMap';
 
-
 class App extends Component {
   render() {
     return (
