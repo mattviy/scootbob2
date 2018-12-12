@@ -17,7 +17,13 @@ class App extends Component {
           <div style={{zIndex: '1', position: 'absolute', top: '5%'}}>
             <CreateRide />
           </div>
-        </div>  
+        </div> 
+
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <div style={{zIndex: '1', position: 'absolute', top: '10%'}}>
+            <CreateRide />
+          </div>
+        </div> 
       </div>
     );
   }
