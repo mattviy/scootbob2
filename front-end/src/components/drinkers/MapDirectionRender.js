@@ -1,13 +1,15 @@
 /*global google*/
 import React, { Component } from 'react';
 
-const { compose, withProps, lifecycle } = require("recompose");
+const { compose, withProps, lifecycle,  } = require("recompose");
 const {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
   DirectionsRenderer,
 } = require("react-google-maps");
+const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
+
 
 const MapWithADirectionsRenderer = compose(
   withProps({
@@ -18,12 +20,9 @@ const MapWithADirectionsRenderer = compose(
   }),
   withScriptjs,
   withGoogleMap,
-
   lifecycle({
     componentDidMount() {
-  
       const DirectionsService = new google.maps.DirectionsService();
-      
       DirectionsService.route({
         origin: new google.maps.LatLng(41.8507300, -87.6512600),
         destination: new google.maps.LatLng(41.8525800, -87.6514100),
@@ -284,6 +283,56 @@ const MapWithADirectionsRenderer = compose(
       ]
     }}
   >
+      <SearchBox
+          ref={props.onSearchBoxMounted}
+          bounds={props.bounds}
+          controlPosition={google.maps.ControlPosition.TOP_LEFT}
+          onPlacesChanged={props.onPlacesChanged}
+        >
+          <input
+            type="text"
+            placeholder="Origin"
+            style={{
+              boxSizing: `border-box`,
+              border: `1px solid transparent`,
+              width: `240px`,
+              height: `32px`,
+              marginTop: `27px`,
+              padding: `0 12px`,
+              borderRadius: `3px`,
+              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+              fontSize: `14px`,
+              outline: `none`,
+              textOverflow: `ellipses`,
+            }}
+          />
+        </SearchBox>
+      
+        <SearchBox
+          ref={props.onSearchBoxMounted}
+          bounds={props.bounds}
+          controlPosition={google.maps.ControlPosition.TOP_LEFT}
+          onPlacesChanged={props.onPlacesChanged}
+        >
+          <input
+            type="text"
+            placeholder="Destination"
+            style={{
+              boxSizing: `border-box`,
+              border: `1px solid transparent`,
+              width: `240px`,
+              height: `32px`,
+              marginTop: `27px`,
+              padding: `0 12px`,
+              borderRadius: `3px`,
+              boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
+              fontSize: `14px`,
+              outline: `none`,
+              textOverflow: `ellipses`,
+            }}
+          />
+        </SearchBox>
+    
     {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
 );
