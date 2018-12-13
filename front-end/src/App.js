@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 // import DrinkerMap from './components/drinkers/DrinkerMap';
 
-import DrinkerMap2 from './components/drinkers/DrinkerMap2';
+import DrinkerMap from './components/drinkers/DrinkerMap';
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <div style={{zIndex: '0', height: '100vh'}} >
-          <DrinkerMap2 origin={this.state.origin}
-        destination={this.state.destination} /> 
+          <DrinkerMap /> 
         </div>
       </div>
     );
