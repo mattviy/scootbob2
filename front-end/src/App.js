@@ -1,23 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import MapWithADirectionsRenderer from './components/drinkers/MapDirectionRender';
-import CreateRide from './components/rides/create-ride';
+// import DrinkerMap from './components/drinkers/DrinkerMap';
 
+import DrinkerMap from './components/drinkers/DrinkerMap';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      origin: (41.8507300, -87.6512600),
+      destination: (41.8525800, -87.6514100)
+    };
+  };
+
   render() {
     return (
       <div className="App">
         <div style={{zIndex: '0', height: '100vh'}} >
-          <MapWithADirectionsRenderer />
+          <DrinkerMap /> 
         </div>
-        
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <div style={{zIndex: '1', position: 'absolute', top: '5%'}}>
-            <CreateRide />
-          </div>
-        </div>  
       </div>
     );
   }
