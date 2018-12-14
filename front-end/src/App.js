@@ -10,7 +10,6 @@ import SignUpVar from "./components/SignUpVar";
 import Profile from './components/Profile';
 import './App.css'
 import axios from 'axios';
-import DrinkerMap from './components/drinkers/DrinkerMap';
 
 class App extends Component {
 
