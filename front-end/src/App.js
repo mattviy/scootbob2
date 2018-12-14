@@ -105,4 +105,4 @@ handleFormChange = (event) => {
   }
 }
 
-export default App;
+export default withRouter(App);

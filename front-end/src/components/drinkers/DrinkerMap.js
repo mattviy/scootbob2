@@ -7,14 +7,25 @@ const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox
 
 class DrinkerMap2 extends React.Component {
   
+  state = {
+
+  }
+  getCoordinates(cObject) {
+    console.log(cObject)
+  }
+  createRide(){
+    console.log("create ")
+  }
+
+
 render() {
- // var myOwnState = this.state
+    var getCoordinates = this.getCoordinates
     const DirectionsComponent = compose(
       withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCBPsUBhfOYqXts2pqPEDsbnV2gvcCGXJE&v=3.exp&libraries=geometry,drawing,places",
-        loadingElement: <div style={{ height: `100vh` }} />,
-        containerElement: <div style={{ height: `100vh` }} />,
-        mapElement: <div style={{ height: `100vh`}} />,
+        loadingElement: <div style={{ height: `85vh` }} />,
+        containerElement: <div style={{ height: `85vh` }} />,
+        mapElement: <div style={{ height: `85vh`}} />,
       }),
       withScriptjs,
       withGoogleMap,
@@ -48,8 +59,13 @@ render() {
           }
         },
         
+        getTheJuice: ()=>{
+          var coordinatesObject = {test: "123123"}
+          debugger
+          getCoordinates(coordinatesObject)
+        },
         onPlacesChanged: () => {
-
+            
             var newState = {}
             if(typeof refs.searchBoxOrigin.getPlaces() != "undefined") {
               const placesOriginLat = refs.searchBoxOrigin.getPlaces()[0].geometry.location.lat();
@@ -64,16 +80,16 @@ render() {
               newState.dLat = placesDestinationLat
               newState.dLng = placesDestinationLng
             }
-
+  
             this.setState(newState, () => {
-              debugger
+              
             })
         
         },
         })
       },
       componentDidUpdate() {
-        debugger
+        
           const DirectionsService = new google.maps.DirectionsService();
           DirectionsService.route({
             origin: new google.maps.LatLng(this.state.oLat, this.state.oLng),
@@ -93,6 +109,7 @@ render() {
       
     }) 
     )(props => {
+      debugger
       return(
       <GoogleMap
       defaultZoom={12}
@@ -116,7 +133,7 @@ render() {
             "elementType": "labels.icon",
             "stylers": [
               {
-                "visibility": "on"
+                "visibility": "off"
               }
             ]
           },
@@ -344,6 +361,7 @@ render() {
               }}
             />
           </SearchBox>
+          <button onClick={props.getTheJuice} olat={this.props.oLat} olng={this.props.oLng} >CONFIRM</button>
         {props.directions && <DirectionsRenderer directions={props.directions} suppressMarkers={props.markers}/>}
       </GoogleMap>)
     });
