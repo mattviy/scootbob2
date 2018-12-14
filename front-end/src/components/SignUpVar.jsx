@@ -1,0 +1,20 @@
+import React from 'react'
+import { SignUps } from "./SignUp";
+import Form from "./Form";
+ 
+const SignUpVar = (props) => {
+  const driverDrinker = id => {
+    return SignUps.find((login) => login.id === id
+    )}
+  const foundSignUp = driverDrinker(props.match.params.id);
+  return (
+    
+    <div>
+      <Form id={foundSignUp.id} change={props.change} submit={props.submitS}/>
+      {props.warningSignUp}
+    </div>
+  )}
+
+
+  
+export default SignUpVar
