@@ -7,7 +7,6 @@ var Profile = (props) =>{
             <div className="map">
               <DrinkerMap /> 
             </div>
-            <h1>Hello {props.name}</h1>
          </div>
         
        )

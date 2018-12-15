@@ -11,7 +11,6 @@ import Profile from './components/Profile';
 import './App.css'
 import axios from 'axios';
 
-
 class App extends Component {
 
   state = {

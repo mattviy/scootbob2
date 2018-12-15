@@ -2,19 +2,22 @@
 import React from 'react'
 import  { compose, withProps, lifecycle } from 'recompose'
 import {withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer} from 'react-google-maps'
+import axios from "axios"
+
+const apiConfig = require('../config');
+const key = apiConfig.apiKey; 
 
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
 class DrinkerMap2 extends React.Component {
-  
+
 render() {
- // var myOwnState = this.state
     const DirectionsComponent = compose(
       withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCBPsUBhfOYqXts2pqPEDsbnV2gvcCGXJE&v=3.exp&libraries=geometry,drawing,places",
-        loadingElement: <div style={{ height: `100vh` }} />,
-        containerElement: <div style={{ height: `100vh` }} />,
-        mapElement: <div style={{ height: `100vh`}} />,
+        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${key}&v=3.exp&libraries=geometry,drawing,places`,
+        loadingElement: <div style={{ height: `81vh` }} />,
+        containerElement: <div style={{ height: `81vh` }} />,
+        mapElement: <div style={{ height: `81vh`}} />,
       }),
       withScriptjs,
       withGoogleMap,
@@ -34,22 +37,33 @@ render() {
           oLat: "",
           dLat: "",
           dLng: "",
-          hoi:  true,
         onMapMounted: ref => {
           refs.map = ref;
         },
-
         onSearchBoxMounted: ref => {
-          
           if (ref.containerElement.firstElementChild.id === "drinker-origin") {
             refs.searchBoxOrigin = ref;
           } else {
             refs.searchBoxDestination = ref;
-          }
+          } 
         },
-        
-        onPlacesChanged: () => {
-
+        calcPrice: () => {
+          axios({
+            method: 'post',
+            url: 'http://localhost:3001/create-rides', 
+            withCredentials: true,
+            data: {
+              originLat: this.state.oLat,
+              originLng: this.state.oLng,
+              destinationLat: this.state.dLat,
+              destinationLng: this.state.dLat,
+            }
+          })
+        },
+        receiveRideDetails: () => {
+          debugger
+        },
+        onPlacesChanged: () => {   
             var newState = {}
             if(typeof refs.searchBoxOrigin.getPlaces() != "undefined") {
               const placesOriginLat = refs.searchBoxOrigin.getPlaces()[0].geometry.location.lat();
@@ -64,16 +78,13 @@ render() {
               newState.dLat = placesDestinationLat
               newState.dLng = placesDestinationLng
             }
-
             this.setState(newState, () => {
-              debugger
+            
             })
-        
-        },
+          },
         })
       },
       componentDidUpdate() {
-        debugger
           const DirectionsService = new google.maps.DirectionsService();
           DirectionsService.route({
             origin: new google.maps.LatLng(this.state.oLat, this.state.oLng),
@@ -90,9 +101,8 @@ render() {
             }
           })
         }
-      
     }) 
-    )(props => {
+    )(props => { 
       return(
       <GoogleMap
       defaultZoom={12}
@@ -116,7 +126,7 @@ render() {
             "elementType": "labels.icon",
             "stylers": [
               {
-                "visibility": "on"
+                "visibility": "off"
               }
             ]
           },
@@ -317,7 +327,6 @@ render() {
               }}
             />
           </SearchBox>
-    
           <SearchBox
             ref={props.onSearchBoxMounted}
             bounds={props.bounds}
@@ -344,6 +353,7 @@ render() {
               }}
             />
           </SearchBox>
+          <button onClick={props.calcPrice}>CONFIRM</button>
         {props.directions && <DirectionsRenderer directions={props.directions} suppressMarkers={props.markers}/>}
       </GoogleMap>)
     });
