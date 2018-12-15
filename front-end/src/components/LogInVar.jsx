@@ -4,13 +4,15 @@ import '../loginForm.css'
 import { Link } from 'react-router-dom'
 
 const LogInVar = props => {
+
   const findLogIn = id => {
     return LogIns.find((login) => login.id === id
   )};
 
+
   const { params } = props.match;
   const foundLogIn = findLogIn(params.id);
-
+  
   return (
   <div className="loginContainer">
     <div className="login-page">
@@ -25,6 +27,7 @@ const LogInVar = props => {
         </div>
     </div>
     {props.confirmation}
+    {props.warning}
   </div>
   )
 }

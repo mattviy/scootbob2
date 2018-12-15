@@ -4,7 +4,7 @@ import DrinkerMap from "./drinkers/DrinkerMap";
 var Profile = (props) =>{
        return(
          <div className="profile">
-            <div style={{zIndex:`0`}} className="map">
+            <div className="map">
               <DrinkerMap /> 
             </div>
          </div>
