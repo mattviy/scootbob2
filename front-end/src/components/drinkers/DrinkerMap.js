@@ -3,14 +3,18 @@ import React from 'react'
 import  { compose, withProps, lifecycle } from 'recompose'
 import {withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer} from 'react-google-maps'
 import axios from "axios"
+
+const apiConfig = require('../config');
+const key = apiConfig.apiKey; 
+
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
 
 class DrinkerMap2 extends React.Component {
-  
+
 render() {
     const DirectionsComponent = compose(
       withProps({
-        googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyCBPsUBhfOYqXts2pqPEDsbnV2gvcCGXJE&v=3.exp&libraries=geometry,drawing,places",
+        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${key}&v=3.exp&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: `81vh` }} />,
         containerElement: <div style={{ height: `81vh` }} />,
         mapElement: <div style={{ height: `81vh`}} />,
@@ -37,13 +41,11 @@ render() {
           refs.map = ref;
         },
         onSearchBoxMounted: ref => {
-        
           if (ref.containerElement.firstElementChild.id === "drinker-origin") {
             refs.searchBoxOrigin = ref;
           } else {
             refs.searchBoxDestination = ref;
-          }
-          
+          } 
         },
         calcPrice: () => {
           axios({
@@ -57,6 +59,9 @@ render() {
               destinationLng: this.state.dLat,
             }
           })
+        },
+        receiveRideDetails: () => {
+          debugger
         },
         onPlacesChanged: () => {   
             var newState = {}
@@ -74,6 +79,7 @@ render() {
               newState.dLng = placesDestinationLng
             }
             this.setState(newState, () => {
+            
             })
           },
         })

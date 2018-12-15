@@ -13,7 +13,7 @@ var rides = require('../models/rides');
 router.post('/', (req, res, err) => {
     var originGeoCode = req.body.originLat + ", " + req.body.originLng;
     var destinationGeoCode = req.body.destinationLat + ", " + req.body.destinationLng;
-    
+   
     rides.create({
         originGeoCode: originGeoCode,
         destinationGeoCode: destinationGeoCode,
