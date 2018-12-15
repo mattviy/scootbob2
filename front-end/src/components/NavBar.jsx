@@ -26,19 +26,19 @@ if (!props.log) {
         <nav className="navbar">
         <ul>
             <li key="pendingRides" className="navbar-item">
-                <NavLink activeClassName='is-active' to="/PeandingRides">Pending Rides</NavLink>
+                <NavLink activeClassName='is-active' className="hvr-underline-from-left" to="/PeandingRides">Pending Rides</NavLink>
             </li> 
             <li key="earnings" className="navbar-item">
-                <NavLink activeClassName='is-active' to="/Earnings">Earnings</NavLink>
+                <NavLink activeClassName='is-active' className="hvr-underline-from-left" to="/Earnings">Earnings</NavLink>
             </li> 
             <li key="home" className="navbar-item">
-                <NavLink exact={true} activeClassName='is-active' to="/">Home</NavLink>
+                <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to="/">Home</NavLink>
             </li>
             <li key="about" className="navbar-item">
-                <NavLink exact={true} activeClassName='is-active' to="/About">About</NavLink>
+                <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to="/About">About</NavLink>
             </li>
-            <li key="home" className="navbar-item">
-                <NavLink exact={true} activeClassName='is-active' to="/Contact">Contact</NavLink>
+            <li key="contact" className="navbar-item">
+                <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to="/Contact">Contact</NavLink>
             </li>
         </ul>
     </nav>

@@ -14,29 +14,30 @@ router.get('/', function(req, res, next) {
 
 
 router.post("/driver", (req,res) => {
-  debugger
+  
   Driver.find({email: req.body.email}, function(err, Driver){
-    debugger
+    
     if (Driver.length > 0) {
-      debugger   
+         
       if (Driver[0].isVerified != true) { 
-        debugger
-        res.send({warning: 'Your e-mail is not verified yet, check the inbox of your mail for the verification e-mail'})
+        
+        res.send({warning: 'Your e-mail is not verified yet, check the inbox of your mail for the verification e-mail',  loggedIn: false})
+        //works
       }
       else {
-        debugger
+        
         var password = req.body.password;
-       debugger
+       
           bcrypt.compare(password, Driver[0].password)
           .then((match) => {
             if (match){
-              debugger
+              
               res.cookie('loggedIn', 'true', {signed: true});
               res.cookie('email', Driver[0].email, {signed: true})
-              res.send({loggedIn: true })
+              res.send({loggedIn: true }) //works
             ;} else {
-            debugger
-            res.send({warning: 'Your combination of credentials is not correct.'})
+            
+            res.send({warning: 'Your combination of credentials is not correct.',  loggedIn: false})
           }
         })
         .catch((err)=> {
@@ -44,41 +45,43 @@ router.post("/driver", (req,res) => {
         })
       }
     }
-    else{ 
-      debugger
-      res.send({warning: 'This e-mail is not yet registered at Scootbob.'})
+    else { 
+      res.send({warning: 'This e-mail is not yet registered at Scootbob.', loggedIn: false})
     }
   })
 })
 
 router.post("/drinker", (req,res) => {
-  debugger
+  
   Drinker.find({email: req.body.email}, function(err, Drinker){
     if (Drinker.length > 0) {
       if (Drinker[0].isVerified != true) { 
-        debugger
-        res.send({warning: 'Your e-mail is not verified yet, check the inbox of your mail for the verification e-mail'})
+        
+        res.send({warning: 'Your e-mail is not verified yet, check the inbox of your mail for the verification e-mail',
+                  loggedIn: false})
       }
       else {
-        debugger
+        
         var password = req.body.password;
-       debugger
+       
           bcrypt.compare(password, Drinker[0].password).then((match) => {
             if (match){
-              debugger
+              
             res.send({loggedIn: true});
             res.signedCookies('loggedIn', 'true', {signed: true});
             res.signedCookies('email', Driver[0].email, {signed: true})}
           else{
-            debugger
-            res.send({warning: 'Your combination of credentials is not correct.'})
+            
+            res.send({warning: 'Your combination of credentials is not correct.',
+            loggedIn: false})
           }
         })
       }
     }
     else{ 
-      debugger
-      res.send({warning: 'This e-mail is not yet registered at Scootbob.'})
+      
+      res.send({warning: 'This e-mail is not yet registered at Scootbob.',
+      loggedIn: false})
     }
   })
 })

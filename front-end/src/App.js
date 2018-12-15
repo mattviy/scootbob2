@@ -10,7 +10,7 @@ import SignUpVar from "./components/SignUpVar";
 import Profile from './components/Profile';
 import './App.css'
 import axios from 'axios';
-import DrinkerMap from './components/drinkers/DrinkerMap';
+
 
 class App extends Component {
 
@@ -33,8 +33,13 @@ handleFormChange = (event) => {
   this.setState(inputChange)
 }
 
+switchOffNotification = () => {
+  setTimeout(()=> {
+ this.setState({confirmation: ''})
+  }, 9000)
+}
+
  signupForm = (props) => {
-     debugger
   axios(`http://localhost:3001/signup/${props.currentTarget.id}`, {
       withCredentials: true,
       method: "POST",
@@ -47,23 +52,25 @@ handleFormChange = (event) => {
       } 
     })
     .then((result)=> {
-      debugger
+      
       if (result.data.confirmation.length > 0) {
-          debugger
-          this.setState({confirmation: result.data.confirmation})
-          this.props.history.push(`/LogIn/${result.data.type}`) 
-         
+          
+          this.setState({confirmation: result.data.confirmation}, this.switchOffNotification())
+          this.props.history.push(`/LogIn/${result.data.type}`)
       } else {
-          debugger
+          
           this.setState({warningSign: result.data.warning })
           this.props.history.push(`/SignUp/${result.data.type}`)
       } 
   })
  }
 
-  submitForm = (props) => {
-      debugger
-      axios(`http://localhost:3001/users/${props.currentTarget.id}`, {
+  
+
+  submitForm = (e) => {
+    e.preventDefault();
+      
+      axios(`http://localhost:3001/users/${e.currentTarget.id}`, {
         withCredentials: true,
         method: "POST",
         data: {
@@ -72,19 +79,19 @@ handleFormChange = (event) => {
         } 
       })
       .then((result)=> {
-          debugger
-          if (result.data.warning.length > 0) {
-              debugger
-              this.setState({warning: result.data.warning })
-              this.props.history.push(`/LogIn/${result.data.type}`)
-          } else {
-              debugger
+          
+          if (result.data.loggedIn.length > 0) {
+              
               this.setState({loggedIn: result.data.loggedIn})
               this.props.history.push("/Profile") 
+        //    this.props.history.push(`/LogIn/${e.currentTarget.id}`)
+          } else  {
+              
+              this.setState({warning: result.data.warning})
           } 
       })
       .catch((err)=> {
-          debugger
+          
         console.log("Error: " + err)
       })
     }
@@ -97,13 +104,13 @@ handleFormChange = (event) => {
                     <Route exact path ='/Profile' render={(props) => <Profile {...props} name={this.state.username}/>}/>
                     <Route exact path = '/' component={Home}/>
                     <Route render={(props)=> <LogIn {...props}  warning={this.state.warning}/>} exact path= '/LogIn'/>
-                    <Route render={(props) => <LogInVar {...props} change={this.handleFormChange} confirmation= {this.state.confirmation} submit= {this.submitForm} />} path= '/LogIn/:id'/>                
+                    <Route render={(props) => <LogInVar {...props} warning={this.state.warning} change={this.handleFormChange} confirmation= {this.state.confirmation} submit= {this.submitForm} />} path= '/LogIn/:id'/>                
                     <Route render={(props)=> <SignUp {...props}  />} exact path= '/SignUp'/>
                     <Route render={(props) => <SignUpVar {...props} warningSignUp={this.state.warningSign}  change={this.handleFormChange} submitS= {this.signupForm} />} path= '/SignUp/:id'/>
                 </Switch>
       </div>
     );
+   } 
   }
-}
 
-export default App;
+export default withRouter(App);
