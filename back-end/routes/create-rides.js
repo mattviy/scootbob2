@@ -13,15 +13,16 @@ var rides = require('../models/rides');
 router.post('/', (req, res, err) => {
     var originGeoCode = req.body.originLat + ", " + req.body.originLng;
     var destinationGeoCode = req.body.destinationLat + ", " + req.body.destinationLng;
-   
     rides.create({
         originGeoCode: originGeoCode,
         destinationGeoCode: destinationGeoCode,
-        originAdress: "",
-        destinationAdress: "",
-        travelDistance: "",
-        travelDuration: "",
-        priceOfRide: ""
+        originAdress: req.body.originAdress,
+        destinationAdress: req.body.destinationAdress,
+        distanceText: req.body.distanceText,
+        distanceValue: req.body.distanceValue,
+        durationText: req.body.durationText,
+        durationValue: req.body.durationValue,
+        priceOfRide: req.body.priceOfRide
       })
       .then((result)=>{
       console.log(result)
