@@ -6,8 +6,10 @@ var requestedRides = mongoose.model('rides', new Schema({
     destinationGeoCode: String,
     originAdress: String,
     destinationAdress: String,
-    travelDistance: Number,
-    travelDuration: Number,
+    distanceText: String,
+    distanceValue: Number,
+    durationText: String,
+    durationValue: Number,
     priceOfRide: Number
 }),'rides')
 
