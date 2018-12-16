@@ -6,7 +6,8 @@ import axios from "axios"
 import { debug } from 'util';
 import RideDetails from './RideDetails';
 
-const apiConfig = require('../config');
+const apiConfig = require('../../config.js');
+
 const key = apiConfig.apiKey; 
 
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
