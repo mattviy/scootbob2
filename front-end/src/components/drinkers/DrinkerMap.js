@@ -4,7 +4,8 @@ import  { compose, withProps, lifecycle } from 'recompose'
 import {withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer} from 'react-google-maps'
 import axios from "axios"
 
-const apiConfig = require('../config');
+const apiConfig = require('../../config.js');
+
 const key = apiConfig.apiKey; 
 
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");

@@ -1,5 +1,6 @@
 *::placeholder{
   color: white;
+  font-family: 'Share Tech Mono';
 }
 #root{
   height: 100vh;
@@ -60,7 +61,7 @@
 }
 
 .form input {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Share Tech Mono", sans-serif;
   outline: 0;
   background: #617073;
   width: 100%;
@@ -72,7 +73,7 @@
   color: white;
 }
 .form button {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Share Tech Mono", sans-serif;
   text-transform: uppercase;
   outline: 0;
   background: #617073;

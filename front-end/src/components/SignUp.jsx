@@ -18,9 +18,9 @@ export const  SignUp = (props) => {
   return(
       <div>
         <h1>Sign Up</h1>
-     {signups}
-     <h1 style={{color: 'black'}}>{props.warning}{props.warningSignUp}</h1> 
-    </div>
+          {signups}
+        <h1 style={{color: 'black'}}>{props.warning}{props.warningSignUp}</h1> 
+      </div>
   )
   }
 
