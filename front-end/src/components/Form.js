@@ -10,7 +10,7 @@ const Form = (props) => {
       <input onChange={props.change} placeholder="E-mail Address" type="email" name="email"/>
       <input onChange={props.change} placeholder="Password" type="password" name="password"/>        
       <input onChange={props.change} placeholder="Confirm Password" type="password" name="confirmPassword"/>       
-      <button id={props.id}  onClick={props.submit}></button> 
+      <button id={props.id} className="submit" onClick={props.submit}></button> 
       <h1>{props.warning}</h1>
     </div>
     

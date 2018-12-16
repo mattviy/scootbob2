@@ -24,7 +24,6 @@ var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup');
 var confirmationRouter = require('./routes/confirmation');
 var createRidesRouter = require('./routes/create-rides');
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

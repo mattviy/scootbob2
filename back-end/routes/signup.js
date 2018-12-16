@@ -14,26 +14,26 @@ var tokenDrinker = require('../models/tokenDrinker')
 
   
 router.post("/driver", (req,res) => { 
-  debugger
+  
   Driver.find({email: req.body.email})
   .then((result) => {
     if (result.length > 0){
       res.send({warning: "An account with the e-mail you've provided already exists",
                 type: "driver",
                 confirmation: ''})                      //works
-      debugger
+      
     } 
     else if (req.body.password != req.body.confirmPassword) {
       res.send({warning: "Your passwords don't match",
                 type: "driver",
                 confirmation: ''
       })                                                //works
-      debugger
+      
     }
     else {
       bcrypt.hash(req.body.password, 5) 
       .then((hash) => {
-        debugger
+        
         Driver.create({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -41,7 +41,7 @@ router.post("/driver", (req,res) => {
         password: hash
         })
         .then((result)=> {
-          debugger
+          
           let token = new tokenDriver({
             _userId: result._id,
             token: crypto.randomBytes(16).toString('hex')
@@ -85,18 +85,20 @@ router.post("/driver", (req,res) => {
  
 
 router.post("/drinker", (req,res) => { 
-  debugger
+  
   Drinker.find({email: req.body.email})
   .then((result) => {
     if (result.length > 0){
       console.log("This email already exists")
       res.send({warning: "An account with the e-mail you've provided already exists",
-      type: "drinker"})
+      type: "drinker",
+      confirmation: ''})
     } 
     else if (req.body.password != req.body.confirmPassword) {
-      debugger
+      
       res.send({warning: "Your passwords don't match",
-      type: "drinker"})
+      type: "drinker",
+      confirmation: ''})
     }
     else {
       bcrypt.hash(req.body.password, 5) 
