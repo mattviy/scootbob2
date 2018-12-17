@@ -392,8 +392,7 @@ render() {
       </GoogleMap>)
     });
 return (
-        <DirectionsComponent 
-        />
+        <DirectionsComponent/>
     )
   }
 }
