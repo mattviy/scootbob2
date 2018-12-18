@@ -9,7 +9,8 @@ import SignUpVar from "./components/SignUpVar";
 import Profile from './components/Profile';
 import Contact from './components/Contact';
 import About from './components/About';
-import Account from './components/Account';
+import Ride from './components/Ride';
+// import Account from './components/Account';
 // import Logout from './components/Logout';
 import './App.css'
 import axios from 'axios';
@@ -28,7 +29,8 @@ class App extends Component {
     warning: '',
     warningSign: '',
     confirmation: '',
-    type: ''
+    type: '',
+    id: ''
 }
 
 componentWillMount(){
@@ -88,10 +90,15 @@ switchOffNotification = () => {
           this.setState({warningSign: result.data.warning }, this.switchOffNotification())
           this.props.history.push(`/SignUp/${result.data.type}`)
       } 
-  })
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
  }
 
-  
+  getRide = (props) => {
+    debugger
+  }
 
   submitForm = (e) => {
     e.preventDefault();
@@ -108,7 +115,7 @@ switchOffNotification = () => {
         
           if (result.data.loggedIn) {
             debugger
-              this.setState({loggedIn: true, type: result.data.type, name: result.data.name })
+              this.setState({loggedIn: true, type: result.data.type, name: result.data.name, id: result.data.id })
               this.props.history.push(`/Profile/${result.data.type}/${result.data.name}`) 
               debugger
           }
@@ -127,8 +134,8 @@ switchOffNotification = () => {
       <div className="App">
             <NavBar loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name} logout={this.logout}/>
             <Switch> 
-                <Route path ='/Profile/:id' render={(props) => <Profile {...props} loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name}/>}/>
-                <Route path ='/Account/:id' render={(props) => <Account {...props} />}/>
+                <Route path ='/Profile/:id' render={(props) => <Profile {...props} getRide={this.getRide} loggedIn={this.state.loggedIn} type={this.state.type} id={this.state.id} name={this.state.name}/>}/>
+                <Route path ='/Ride/:id' render={(props) => <Ride {...props} loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name} id={this.state.id}/>}/>
                 <Route exact path = '/' component={Home}/>
                 <Route exact path = '/About' component={About}/>
                 <Route exact path = '/Contact' component={Contact}/>

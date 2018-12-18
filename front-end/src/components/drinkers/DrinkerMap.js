@@ -87,6 +87,7 @@ render() {
             console.log("no input to create ride")
             // Pass values as props so that user sees the error.
           }
+
         },
         onPlacesChanged: () => {   
             var newState = {}

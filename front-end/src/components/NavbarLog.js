@@ -29,9 +29,6 @@ export default class NavbarLog extends Component {
                 <li key="about" className="navbar-item">
                     <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to="/About">About</NavLink>
                 </li>
-                <li key="account" className="navbar-item">
-                    <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to={`/Account/${this.props.type}/${this.props.name}`}>Account</NavLink>
-                </li>
                 <li key="contact" className="navbar-item">
                     <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to="/Contact">Contact</NavLink>
                 </li>
