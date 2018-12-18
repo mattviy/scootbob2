@@ -9,6 +9,7 @@ import SignUpVar from "./components/SignUpVar";
 import Profile from './components/Profile';
 import Contact from './components/Contact';
 import About from './components/About';
+import Account from './components/Account';
 // import Logout from './components/Logout';
 import './App.css'
 import axios from 'axios';
@@ -41,15 +42,15 @@ componentWillMount(){
 }
 
 logout = () => {
-axios('http://localhost:3001/logout', {withCredentials: true})
-.then((result)=> {
-  debugger
-  this.setState({loggedIn: result.data.loggedIn})
-})
-.catch((err)=>{
-  debugger
-  console.log(err)
-})
+  axios('http://localhost:3001/logout', {withCredentials: true})
+  .then((result)=> {
+    debugger
+    this.setState({loggedIn: result.data.loggedIn})
+  })
+  .catch((err)=>{
+    debugger
+    console.log(err)
+  })
 }
 
 handleFormChange = (event) => {
@@ -69,15 +70,15 @@ switchOffNotification = () => {
 
  signupForm = (props) => {
   axios(`http://localhost:3001/signup/${props.currentTarget.id}`, {
-      withCredentials: true,
-      method: "POST",
-      data: {
-        password: this.state.password,
-        confirmPassword: this.state.confirmPassword,
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        email: this.state.email,
-      } 
+    withCredentials: true,
+    method: "POST",
+    data: {
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+    } 
   })
     .then((result)=> {
       if (result.data.confirmation.length > 0) {
@@ -127,6 +128,7 @@ switchOffNotification = () => {
             <NavBar loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name} logout={this.logout}/>
             <Switch> 
                 <Route path ='/Profile/:id' render={(props) => <Profile {...props} loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name}/>}/>
+                <Route path ='/Account/:id' render={(props) => <Account {...props} />}/>
                 <Route exact path = '/' component={Home}/>
                 <Route exact path = '/About' component={About}/>
                 <Route exact path = '/Contact' component={Contact}/>
