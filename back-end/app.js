@@ -23,6 +23,8 @@ var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup');
 var confirmationRouter = require('./routes/confirmation');
 var createRidesRouter = require('./routes/create-rides');
+var recieveRidesRouter = require('./routes/api')
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -43,7 +45,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/confirmation', confirmationRouter);
-app.use('/create-rides', createRidesRouter);
+app.use('/create-rides', createRidesRouter)
+app.use('/api', recieveRidesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
