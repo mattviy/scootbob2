@@ -9,50 +9,41 @@ import RequestedRides from './../components/drivers/RequestedRides'
   state = {
     cookies: '',
     rides: [{
-      name: "Matt Hamers",
-      originAdress: "KNSM-Laan 339",
-      destinationAdress: "Jisperveldstraat",
-      priceOfRide: "10.00",
-      distanceValue: "6.3",
-      durationValue: "14",  
-    }, 
-    {
-      name: "David Zlobic",
-      originAdress: "Jisperveldstraat",
-      destinationAdress: "KNSM-Laan 339",
-      priceOfRide: "10.00",
-      distanceValue: "6.3",
-      durationValue: "14",  
+      name: "",
+      originAdress: "",
+      destinationAdress: "",
+      priceOfRide: "",
+      distanceValue: "",
+      durationValue: "",
+      statusRide: ""  
     }] 
   }
  
-
-
-
-  // componentDidMount() {
-  //   debugger
-  //   axios("http://localhost:3001/users/profile", {withCredentials: true, method: 'get'})
-  //   .then((result)=> {
-  //     debugger
-  //     this.setState({cookies: result.data.cookies})
-  //   })
-  //   .catch((error)=> {
-  //     debugger
-  //     console.log(error)
-  //   })
-  // }
+  componentWillMount() {
+    
+    axios("http://localhost:3001/users/rides", {
+      withCredentials: true, 
+      method: 'get'
+    })
+    .then((result)=> {
+      this.setState({cookies: result.data.cookies})
+    })
+    .catch((error)=> {
+      console.log(error)
+    })
+  }
 
   render() {
     var profile;
   if (!this.props.loggedIn){
-    return  profile = <h1>Kaghba</h1>
+    return  profile = <h1>test</h1>
   }
   else if (this.props.loggedIn && this.props.type === "drinker") {
     return <DrinkerMap />
   }
   else if (this.props.loggedIn && this.props.type === "driver") {
     return (
-    <RequestedRides rides={this.state.rides}> 
+    <RequestedRides> 
       <h1>{this.props.name}</h1> 
     </RequestedRides>
     )

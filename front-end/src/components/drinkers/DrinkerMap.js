@@ -26,6 +26,7 @@ render() {
       withGoogleMap,
       lifecycle({
         componentWillMount() {
+          debugger
           const refs = {
             searchBoxOrigin: {},
             searchBoxDestination:  {}
@@ -47,15 +48,19 @@ render() {
           durationText: "",
           durationValue: "",
           priceOfRide: "", 
+          rideStatus: "",
         onMapMounted: ref => {
           refs.map = ref;
         },
-        onSearchBoxMounted: ref => {
+        onSearchBoxMounted: (ref) => {
+          debugger
+          if(ref != null){
           if (ref.containerElement.firstElementChild.id === "drinker-origin") {
             refs.searchBoxOrigin = ref;
           } else {
             refs.searchBoxDestination = ref;
           } 
+        }
         },
         createRide: () => {
           if (this.state.oAdress != "" && this.state.dAdress != "" ) {
@@ -74,16 +79,14 @@ render() {
               distanceValue: this.state.distanceValue,
               durationText: this.state.durationText,
               durationValue: this.state.durationValue,
-              priceOfRide: this.state.priceOfRide
+              priceOfRide: this.state.priceOfRide,
+              rideStatus: this.state.rideStatus
             } 
           })
           } else {
             console.log("no input to create ride")
             // Pass values as props so that user sees the error.
           }
-        },
-        receiveRideDetails: () => {
-          
         },
         onPlacesChanged: () => {   
             var newState = {}
@@ -104,6 +107,7 @@ render() {
               newState.dAdress = placesDestinationAdress
             }
             this.setState(newState, () => { 
+
             })
           },
         })
@@ -123,7 +127,8 @@ render() {
                 distanceValue: (result.routes[0].legs[0].distance.value / 1000).toFixed(1),
                 durationText: result.routes[0].legs[0].duration.text,
                 durationValue: (result.routes[0].legs[0].duration.value / 60).toFixed(0),
-                priceOfRide: ((result.routes[0].legs[0].distance.value / 1000) * 2).toFixed(2)
+                priceOfRide: ((result.routes[0].legs[0].distance.value / 1000) * 2).toFixed(2),
+                rideStatus: "Pending"
               })
             } else {
               console.error(`error fetching directions ${result}`);
@@ -134,6 +139,7 @@ render() {
     )(props => { 
       return(
       <GoogleMap
+      ref={props.onMapMounted}
       defaultZoom={12}
       defaultCenter={new google.maps.LatLng(52.377956, 4.897070)}
       options={{ 
@@ -331,13 +337,13 @@ render() {
       }}
       >
       <SearchBox
-            ref={props.onSearchBoxMounted}
+            ref={props.onSearchBoxMounted}  
             bounds={props.bounds}
             controlPosition={google.maps.ControlPosition.TOP_LEFT}
             onPlacesChanged={props.onPlacesChanged}
             onChange = {props.getValue}
           >
-            <input
+            <input  
               name= "origin"
               id="drinker-origin"
               type="text"
