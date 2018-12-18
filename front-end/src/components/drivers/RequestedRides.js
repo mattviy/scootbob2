@@ -6,6 +6,10 @@ export default class RequestedRides extends Component {
     rides: []
   }
   
+  acceptRide = () => {
+    //write axios post req. to add the drivers ID to the ride and change status from "pending" to "accepted".
+  }
+
   componentWillMount() {
     axios({
       method:'get',
@@ -31,6 +35,7 @@ export default class RequestedRides extends Component {
         <li>Distance: km {ride.distanceValue}</li>
         <li>Duration: min {ride.durationValue}</li>
         <li>Status: {ride.rideStatus}</li>
+        <li><button onClick={this.acceptRide}>See Details</button></li>
         <li>__________________________________</li>
     </ul>
     )
