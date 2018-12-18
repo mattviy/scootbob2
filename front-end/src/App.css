@@ -4,7 +4,7 @@
 }
 
 body,html{
-  background-color: #617073;
+  background-image: url('./images/background-map.png');
   font-family: 'Share Tech Mono', monospace;
   height: 100vh;
 }
