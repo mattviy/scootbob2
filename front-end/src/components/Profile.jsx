@@ -1,8 +1,8 @@
 import DrinkerMap from "./drinkers/DrinkerMap.js";
-import axios from 'axios'
 import React, { Component } from 'react'
 import LogIn from './LogIn'
-// 
+import RequestedRides from './../components/drivers/RequestedRides'
+
  class Profile extends Component {
     render() {
       var profileDrinker = <div className="profile">
@@ -10,9 +10,10 @@ import LogIn from './LogIn'
                                 <DrinkerMap />
                               </div>
                             </div> 
-      var profileDriver =  <div className="profile">
+      var profileDriver =  <RequestedRides>
                               <h1>{this.props.name}</h1>
-                            </div>
+                           </RequestedRides>
+
 
             return (
               <div>
@@ -21,7 +22,7 @@ import LogIn from './LogIn'
               </div>)
     }
   }
- 
+
 
 export default Profile 
  

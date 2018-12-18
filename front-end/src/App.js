@@ -104,7 +104,7 @@ switchOffNotification = () => {
         } 
       })
       .then((result)=> {
-        debugger
+        
           if (result.data.loggedIn) {
             debugger
               this.setState({loggedIn: true, type: result.data.type, name: result.data.name })
