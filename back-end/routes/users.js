@@ -35,8 +35,9 @@ router.post("/driver", (req,res) => {
               debugger
               res.cookie('loggedIn', 'true', {signed: true});
               res.cookie('type', 'driver', {signed: true})
-              res.send({type: 'driver', name: name, id: id }) //works
-            ;} else {
+              res.cookie('name', name, {signed: true})
+              res.send({loggedIn: true, type: 'driver', name: name, id: id});
+              ;} else {
               
             res.send({warning: 'Your combination of credentials is not correct.',  loggedIn: false})
           }
@@ -88,12 +89,5 @@ router.post("/drinker", (req,res) => {
   })
 })
 
-
-router.get('/logout', (req,res) => {
-  debugger
- res.clearCookie('loggedIn', {signed: true})
- res.send({cookie: "cleared"})
- 
-})
 
 module.exports = router;

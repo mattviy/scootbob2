@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 
 export default class NavbarLog extends Component {
+    debugger
   render() {
     var driver = 
       <React.Fragment>
