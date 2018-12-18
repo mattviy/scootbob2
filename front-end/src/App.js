@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
 import { Switch, Route, withRouter } from "react-router-dom";
 import Home from "./components/Home";
-import SignUp from "./components/SignUp"
+import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
 import LogIn from "./components/LogIn";
 import LogInVar from "./components/LogInVar";
@@ -10,6 +9,7 @@ import SignUpVar from "./components/SignUpVar";
 import Profile from './components/Profile';
 import Contact from './components/Contact';
 import About from './components/About';
+// import Logout from './components/Logout';
 import './App.css'
 import axios from 'axios';
 
@@ -23,11 +23,33 @@ class App extends Component {
     email: '',
     password: '',
     confirmPassword: '',
-    loggedIn: false,
+    loggedIn: '',
     warning: '',
     warningSign: '',
     confirmation: '',
     type: ''
+}
+
+componentWillMount(){
+  debugger
+  axios('http://localhost:3001/cookies', {withCredentials: true})
+  .then((result)=> {
+    debugger
+    result.data.loggedIn ? this.setState({loggedIn: true, type: result.data.type, name: result.data.name}) : this.setState({loggedIn: false})
+    debugger
+  })
+}
+
+logout = () => {
+axios('http://localhost:3001/logout', {withCredentials: true})
+.then((result)=> {
+  debugger
+  this.setState({loggedIn: result.data.loggedIn})
+})
+.catch((err)=>{
+  debugger
+  console.log(err)
+})
 }
 
 handleFormChange = (event) => {
@@ -58,7 +80,6 @@ switchOffNotification = () => {
       } 
   })
     .then((result)=> {
-      
       if (result.data.confirmation.length > 0) {
           this.setState({confirmation: result.data.confirmation}, this.switchOffNotification())
           this.props.history.push(`/LogIn/${result.data.type}`)
@@ -73,7 +94,7 @@ switchOffNotification = () => {
 
   submitForm = (e) => {
     e.preventDefault();
-    
+    debugger
       axios(`http://localhost:3001/users/${e.currentTarget.id}`, {
         withCredentials: true,
         method: "POST",
@@ -85,16 +106,17 @@ switchOffNotification = () => {
       .then((result)=> {
         
           if (result.data.loggedIn) {
-              this.setState({loggedIn: result.data.loggedIn, type: result.data.type, name: result.data.name })
+            debugger
+              this.setState({loggedIn: true, type: result.data.type, name: result.data.name })
               this.props.history.push(`/Profile/${result.data.type}/${result.data.name}`) 
+              debugger
           }
            else  {
-            
               this.setState({warning: result.data.warning}, this.switchOffNotification())
           } 
       })
       .catch((err)=> {
-          
+        debugger
         console.log("Error: " + err)
       })
     }
@@ -102,17 +124,17 @@ switchOffNotification = () => {
   render() {
     return (
       <div className="App">
-       <NavBar type={this.state.type} name={this.state.name} />
-                <Switch> 
-                    <Route path ='/Profile/:id' render={(props) => <Profile {...props} loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name}/>}/>
-                    <Route exact path = '/' component={Home}/>
-                    <Route exact path = '/About' component={About}/>
-                    <Route exact path = '/Contact' component={Contact}/>
-                    <Route render={(props)=> <LogIn {...props}  warning={this.state.warning}/>} exact path= '/LogIn'/>
-                    <Route render={(props) => <LogInVar {...props} warning={this.state.warning} change={this.handleFormChange} confirmation= {this.state.confirmation} submit= {this.submitForm} />} path= '/LogIn/:id'/>                
-                    <Route render={(props)=> <SignUp {...props}  />} exact path= '/SignUp'/>
-                    <Route render={(props) => <SignUpVar {...props} warningSignUp={this.state.warningSign}  change={this.handleFormChange} submitS= {this.signupForm} />} path= '/SignUp/:id'/>
-                </Switch>
+            <NavBar loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name} logout={this.logout}/>
+            <Switch> 
+                <Route path ='/Profile/:id' render={(props) => <Profile {...props} loggedIn={this.state.loggedIn} type={this.state.type} name={this.state.name}/>}/>
+                <Route exact path = '/' component={Home}/>
+                <Route exact path = '/About' component={About}/>
+                <Route exact path = '/Contact' component={Contact}/>
+                <Route render={(props)=> <LogIn {...props}  warning={this.state.warning}/>} exact path= '/LogIn'/>
+                <Route render={(props) => <LogInVar {...props} warning={this.state.warning} change={this.handleFormChange} confirmation= {this.state.confirmation} submit= {this.submitForm} />} path= '/LogIn/:id'/>                
+                <Route render={(props)=> <SignUp {...props}  />} exact path= '/SignUp'/>
+                <Route render={(props) => <SignUpVar {...props} warningSignUp={this.state.warningSign}  change={this.handleFormChange} submitS= {this.signupForm} />} path= '/SignUp/:id'/>
+            </Switch>
       </div>
     );
    } 

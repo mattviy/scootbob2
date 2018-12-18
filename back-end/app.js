@@ -23,7 +23,10 @@ var usersRouter = require('./routes/users');
 var signupRouter = require('./routes/signup');
 var confirmationRouter = require('./routes/confirmation');
 var createRidesRouter = require('./routes/create-rides');
+var logoutRouter = require('./routes/logout');
+var cookieRouter = require('./routes/cookies')
 var recieveRidesRouter = require('./routes/api')
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -45,7 +48,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signupRouter);
 app.use('/confirmation', confirmationRouter);
-app.use('/create-rides', createRidesRouter)
+app.use('/create-rides', createRidesRouter);
+app.use('/logout', logoutRouter);
+app.use('/cookies', cookieRouter)
 app.use('/api', recieveRidesRouter);
 
 // catch 404 and forward to error handler
@@ -58,7 +63,6 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
 });

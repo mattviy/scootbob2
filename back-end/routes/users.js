@@ -34,8 +34,8 @@ router.post("/driver", (req,res) => {
             if (match){
               debugger
               res.cookie('loggedIn', 'true', {signed: true});
-              res.cookie('email', Driver[0].email, {signed: true})
-              res.send({loggedIn: true, type: 'driver', name: name, id: id }) //works
+              res.cookie('type', 'driver', {signed: true})
+              res.send({type: 'driver', name: name, id: id }) //works
             ;} else {
               
             res.send({warning: 'Your combination of credentials is not correct.',  loggedIn: false})
@@ -65,14 +65,15 @@ router.post("/drinker", (req,res) => {
                   loggedIn: false})
       }
       else {
-        
         var password = req.body.password;
           bcrypt.compare(password, Drinker[0].password).then((match) => {
             if (match){
-              
-            res.send({loggedIn: true, type: 'drinker', name: name, id: id});
+              debugger
             res.cookie('loggedIn', 'true', {signed: true});
-            res.cookie('email', Driver[0].email, {signed: true})}
+            res.cookie('type', 'drinker', {signed: true})
+            res.cookie('name', name, {signed: true})
+            res.send({loggedIn: true, type: 'drinker', name: name, id: id});
+            }
           else{
             res.send({warning: 'Your combination of credentials is not correct.',
             loggedIn: false})
@@ -87,10 +88,12 @@ router.post("/drinker", (req,res) => {
   })
 })
 
-router.get('/profile', (req,res) => {
+
+router.get('/logout', (req,res) => {
   debugger
- (req.cookies.loggedIn === "true") ? res.send({cookies: 'Cookies are set, log in is possible'}): res.send({cookies: 'Cookies are not set, log in is not possible'})
- debugger
+ res.clearCookie('loggedIn', {signed: true})
+ res.send({cookie: "cleared"})
+ 
 })
 
 module.exports = router;
