@@ -3,6 +3,8 @@ import React from 'react'
 import  { compose, withProps, lifecycle } from 'recompose'
 import {withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer} from 'react-google-maps'
 import axios from "axios"
+import { debug } from 'util';
+import RideDetails from './RideDetails';
 
 const apiConfig = require('../../config.js');
 
@@ -38,6 +40,13 @@ render() {
           oLat: "",
           dLat: "",
           dLng: "",
+          oAdress: "",
+          dAdress: "",
+          distanceText: "",
+          distanceValue: "",
+          durationText: "",
+          durationValue: "",
+          priceOfRide: "", 
         onMapMounted: ref => {
           refs.map = ref;
         },
@@ -48,7 +57,8 @@ render() {
             refs.searchBoxDestination = ref;
           } 
         },
-        calcPrice: () => {
+        createRide: () => {
+          if (this.state.oAdress != "" && this.state.dAdress != "" ) {
           axios({
             method: 'post',
             url: 'http://localhost:3001/create-rides', 
@@ -58,29 +68,42 @@ render() {
               originLng: this.state.oLng,
               destinationLat: this.state.dLat,
               destinationLng: this.state.dLat,
-            }
+              originAdress: this.state.oAdress, 
+              destinationAdress: this.state.dAdress,
+              distanceText: this.state.distanceText,
+              distanceValue: this.state.distanceValue,
+              durationText: this.state.durationText,
+              durationValue: this.state.durationValue,
+              priceOfRide: this.state.priceOfRide
+            } 
           })
+          } else {
+            console.log("no input to create ride")
+            // Pass values as props so that user sees the error.
+          }
         },
         receiveRideDetails: () => {
-          debugger
+          
         },
         onPlacesChanged: () => {   
             var newState = {}
             if(typeof refs.searchBoxOrigin.getPlaces() != "undefined") {
               const placesOriginLat = refs.searchBoxOrigin.getPlaces()[0].geometry.location.lat();
               const placesOriginLng = refs.searchBoxOrigin.getPlaces()[0].geometry.location.lng();
+              const placesOriginAdress = refs.searchBoxOrigin.getPlaces()[0].formatted_address;
               newState.oLat = placesOriginLat
               newState.oLng = placesOriginLng
-            }
-            
+              newState.oAdress = placesOriginAdress    
+            }   
             if(typeof refs.searchBoxDestination.getPlaces() != "undefined") {
               const placesDestinationLat = refs.searchBoxDestination.getPlaces()[0].geometry.location.lat();
               const placesDestinationLng = refs.searchBoxDestination.getPlaces()[0].geometry.location.lng();
+              const placesDestinationAdress = refs.searchBoxDestination.getPlaces()[0].formatted_address;
               newState.dLat = placesDestinationLat
               newState.dLng = placesDestinationLng
+              newState.dAdress = placesDestinationAdress
             }
-            this.setState(newState, () => {
-            
+            this.setState(newState, () => { 
             })
           },
         })
@@ -92,10 +115,15 @@ render() {
             destination: new google.maps.LatLng(this.state.dLat, this.state.dLng),
             travelMode: google.maps.TravelMode.DRIVING,
           }, (result, status) => { 
-            if (status === google.maps.DirectionsStatus.OK) {
+            if (status === google.maps.DirectionsStatus.OK) {   
               this.setState({
                 directions: {...result},
-                markers: true
+                markers: true,
+                distanceText: result.routes[0].legs[0].distance.text,
+                distanceValue: (result.routes[0].legs[0].distance.value / 1000).toFixed(1),
+                durationText: result.routes[0].legs[0].duration.text,
+                durationValue: (result.routes[0].legs[0].duration.value / 60).toFixed(0),
+                priceOfRide: ((result.routes[0].legs[0].distance.value / 1000) * 2).toFixed(2)
               })
             } else {
               console.error(`error fetching directions ${result}`);
@@ -307,8 +335,10 @@ render() {
             bounds={props.bounds}
             controlPosition={google.maps.ControlPosition.TOP_LEFT}
             onPlacesChanged={props.onPlacesChanged}
+            onChange = {props.getValue}
           >
             <input
+              name= "origin"
               id="drinker-origin"
               type="text"
               placeholder="Origin"
@@ -333,8 +363,10 @@ render() {
             bounds={props.bounds}
             controlPosition={google.maps.ControlPosition.TOP_RIGHT}
             onPlacesChanged={props.onPlacesChanged}
+            onChange = {props.getValue}
           >
             <input
+              name= "destination"
               id="drinker-destination"
               type="text"
               placeholder="Destination"
@@ -354,13 +386,13 @@ render() {
               }}
             />
           </SearchBox>
-          <button onClick={props.calcPrice}>CONFIRM</button>
+          <button onClick={props.createRide}>CONFIRM</button>
+          <RideDetails distanceValue={props.distanceValue} durationValue={props.durationValue} priceOfRide={props.priceOfRide}/>
         {props.directions && <DirectionsRenderer directions={props.directions} suppressMarkers={props.markers}/>}
       </GoogleMap>)
     });
 return (
-        <DirectionsComponent 
-        />
+        <DirectionsComponent/>
     )
   }
 }

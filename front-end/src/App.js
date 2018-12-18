@@ -83,7 +83,7 @@ switchOffNotification = () => {
         } 
       })
       .then((result)=> {
-        debugger
+        
           if (result.data.loggedIn) {
               this.setState({loggedIn: result.data.loggedIn, type: result.data.type, name: result.data.name })
               this.props.history.push(`/Profile/${result.data.type}/${result.data.name}`) 
