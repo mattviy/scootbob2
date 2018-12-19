@@ -36,6 +36,7 @@ router.post("/driver", (req,res) => {
               res.cookie('loggedIn', 'true', {signed: true});
               res.cookie('type', 'driver', {signed: true})
               res.cookie('name', name, {signed: true})
+              res.cookie('driverId', id, {signed: true});
               res.send({loggedIn: true, type: 'driver', name: name, id: id});
               ;} else {
               
