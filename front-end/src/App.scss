@@ -1,0 +1,324 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+$anim-text-offset: 1em;
+body,
+html {
+  background-image: url("./images/background-map.png");
+  font-family: "Share Tech Mono", monospace;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+.App {
+  height: 100%;
+}
+.navbar {
+  width: 100%;
+  height: 10%;
+  background-color: black !important;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: "Share Tech Mono";
+  font-size: 1.3rem;
+  margin: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  position: absolute;
+
+  ul > li {
+    display: inline;
+  }
+
+  ul > li > a {
+    text-decoration: none;
+    margin-right: 25px;
+    color: #e6e6e6;
+    font-weight: 900;
+  }
+
+  ul > li > a:focus {
+    color: white;
+  }
+
+  ul {
+    position: relative;
+    right: 1%;
+  }
+}
+
+.conceptContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  position: relative;
+  top: 140px;
+  margin: 0 !important;
+  width: 710px;
+  max-width: 80vw;
+
+  .fas {
+    font-size: 45px;
+    color: white;
+  }
+
+  p {
+    font-weight: 900;
+    font-size: calc(1rem + (7 * ((100vw - 467px) / 1600))) !important;
+    width: 190px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: text-top;
+    color: white;
+  }
+}
+
+.containerFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  text-align: center;
+  min-width: 80vw;
+  height: 95%;
+
+  h1 {
+    font-size: calc(2.9rem + (40 * ((100vw - 467px) / 1600)));
+    text-shadow: -4px 3px 0 #525e63;
+    max-width: 70vw;
+    display: block;
+    margin: 0 auto;
+    color: white;
+    position: relative;
+    top: 3%;
+  }
+
+  h2 {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    max-width: 80vw;
+    margin-top: 10px;
+    font-weight: 900;
+    position: relative;
+    top: 3%;
+  }
+}
+
+.loginDiv {
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  top: 10%;
+
+  .loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    height: 350px;
+    margin-left: 40px;
+    max-width: 70vw;
+    border-radius: 5px;
+    border: 3px solid rgba(255,255,255,0.5);
+
+    img{
+      color: white;
+      width: 50px;
+      height: 50px;
+      margin-top: 30px;
+    }
+
+    p{
+      max-width: 28vw;
+      font-weight: 900;
+      padding: 0 20px 20px 20px;
+      border-bottom: 3px solid white;
+      font-size: calc(0.8rem + (10 * ((100vw - 467px) / 1600)));
+    }
+  }
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 50px;
+    padding-bottom: 5px;
+    color: white;
+    position: relative;
+    left: 0.5%;
+    text-transform: uppercase;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 80vw;
+  }
+
+  .button {
+    -webkit-touch-callout: none;
+    user-select: none;
+    display: block;
+    border: 0.2em solid;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    opacity: 1;
+    color: white;
+    background-color: #525e63;
+    margin-bottom: 35px;
+    max-width: 20vw;
+
+    &__text {
+      display: block;
+      padding: 1em 2em;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: calc(0.8rem + (10 * ((100vw - 467px) / 1600)));
+      &:before {
+        content: attr(title);
+      }
+      &--bis {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: translateX(-1 * $anim-text-offset);
+        opacity: 0;
+        color: white;
+      }
+    }
+    &__mask {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: white;
+      transform: translateX(-100%) rotate(45deg);
+      transition: all 0.3s;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+      z-index: 1;
+      position: relative;
+    }
+
+    span{
+      font-size: calc(0.5rem + (10 * ((100vw - 467px) / 1600)));
+    }
+  }
+
+  .button:hover {
+    opacity: 1;
+    .button__text {
+      animation: 0.3s ease-out;
+      &--bis {
+        animation: 0.3s ease-out;
+      }
+    }
+    .button__mask {
+      animation: fx-mask 0.3s ease-out;
+    }
+  }
+
+  .button:active {
+    opacity: 1;
+    background: white;
+    color: inherit;
+  }
+
+  @keyframes fx-mask {
+    0% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  @keyframes fx-text {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX($anim-text-offset);
+      opacity: 0;
+    }
+  }
+  @keyframes fx-text-bis {
+    0% {
+      transform: translateX(-1 * $anim-text-offset);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+@media only screen and (min-width: 250px) and (max-width: 767px) {
+
+  .conceptContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 80px;
+    margin: 0 !important;
+    width: 710px;
+    max-width: 80vw;
+   
+    p {
+      margin-bottom: 30px;
+    }
+  }
+  .containerFlex{
+    height: 100%;
+  }
+
+  .loginDiv{
+
+    .buttons {
+      display: flex;
+      flex-direction: column;      
+    }
+
+    .loginContainer{
+      margin: 0 0 20px 0;
+      max-width: 45vw;
+
+    }
+
+    .button{
+      max-width: 30vw;
+
+      
+    }
+
+
+    .loginContainer{
+      height: 300px
+    }
+  }
+ 
+
+}
+
