@@ -11,7 +11,10 @@ var requestedRides = mongoose.model('rides', new Schema({
     durationText: String,
     durationValue: Number,
     priceOfRide: Number,
-    rideStatus: String
+    rideStatus: String,
+    drinkerName: String,
+    drinker: { type: Schema.Types.ObjectId, ref: "drinker"},
+    driver: { type: Schema.Types.ObjectId, ref: "driver"}
 }),'rides')
 
 module.exports = requestedRides

@@ -9,10 +9,10 @@ export default class NavBar extends Component {
   render() {
     var navbar;
     if (!this.props.loggedIn){
-      debugger
+      
       navbar = <NavbarSt />
     } else {
-      debugger
+      
       navbar = <NavbarLog loggedIn={this.props.loggedIn} type={this.props.type} name={this.props.name} logout={this.props.logout}/>    
     }
     return (
