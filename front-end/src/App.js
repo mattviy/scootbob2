@@ -34,23 +34,23 @@ class App extends Component {
 }
 
 componentWillMount(){
-  debugger
+  
   axios('http://localhost:3001/cookies', {withCredentials: true})
   .then((result)=> {
-    debugger
+    
     result.data.loggedIn ? this.setState({loggedIn: true, type: result.data.type, name: result.data.name}) : this.setState({loggedIn: false})
-    debugger
+    
   })
 }
 
 logout = () => {
   axios('http://localhost:3001/logout', {withCredentials: true})
   .then((result)=> {
-    debugger
+    
     this.setState({loggedIn: result.data.loggedIn})
   })
   .catch((err)=>{
-    debugger
+    
     console.log(err)
   })
 }
@@ -97,12 +97,12 @@ switchOffNotification = () => {
  }
 
   getRide = (props) => {
-    debugger
+    
   }
 
   submitForm = (e) => {
     e.preventDefault();
-    debugger
+    
       axios(`http://localhost:3001/users/${e.currentTarget.id}`, {
         withCredentials: true,
         method: "POST",
@@ -114,17 +114,17 @@ switchOffNotification = () => {
       .then((result)=> {
         
           if (result.data.loggedIn) {
-            debugger
+            
               this.setState({loggedIn: true, type: result.data.type, name: result.data.name, id: result.data.id })
               this.props.history.push(`/Profile/${result.data.type}/${result.data.name}`) 
-              debugger
+              
           }
            else  {
               this.setState({warning: result.data.warning}, this.switchOffNotification())
           } 
       })
       .catch((err)=> {
-        debugger
+        
         console.log("Error: " + err)
       })
     }

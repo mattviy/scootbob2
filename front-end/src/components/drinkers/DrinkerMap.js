@@ -63,7 +63,7 @@ render() {
         }
         },
         createRide: () => {
-          if (this.state.oAdress != "" && this.state.dAdress != "" ) {
+          if (this.state.oAdress !== "" && this.state.dAdress !== "" ) {
           axios({
             method: 'post',
             url: 'http://localhost:3001/create-rides', 
@@ -87,7 +87,6 @@ render() {
             console.log("no input to create ride")
             // Pass values as props so that user sees the error.
           }
-
         },
         onPlacesChanged: () => {   
             var newState = {}

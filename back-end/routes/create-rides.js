@@ -13,7 +13,6 @@ var rides = require('../models/rides');
 router.post('/', (req, res, err) => {
     var originGeoCode = req.body.originLat + ", " + req.body.originLng;
     var destinationGeoCode = req.body.destinationLat + ", " + req.body.destinationLng;
-    debugger
     rides.create({
         _drinkerid: req.signedCookies.drinkerId,
         drinkerName: req.signedCookies.name,
@@ -35,5 +34,13 @@ router.post('/', (req, res, err) => {
         if (err) console.log("Error: " + err)
       })
     });
+
+// router.post('/update-ride', (req, res, err) => {
+//   db.rides.update(
+//     { _id : "5c1997e25d5d7d826b10fe9e" },
+//     { $set: { "rideStatus": "Accepted" } }
+//  )
+//  console.log("post req sucessfully executed")
+// })
 
 module.exports = router; 

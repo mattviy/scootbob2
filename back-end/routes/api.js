@@ -6,11 +6,11 @@ Ride = require('../models/rides')
 router.get('/pending-rides', function(req, res) {
   Ride.find({}).populate('drinker').exec()
   .then((result) => {
-    debugger
+    
     res.json(result);
   })
   .catch((err) =>{
-    debugger
+    
    console.log(err)
   })
 });
