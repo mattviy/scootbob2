@@ -1,0 +1,129 @@
+.ride-card{
+    
+    .card {
+        display: flex;
+        flex-wrap: wrap;
+        color: black;
+        background-color: white;
+        width: 90%;
+        height: 200px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+    #price {
+        margin-top: 30%;
+        margin-left: 10%;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    #accept {
+        margin-bottom: 30%;
+        margin-left: 10%;
+        font-size: 15px;
+        font-weight: bold;
+    }
+    .column-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+        width: 20%;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .column-left:hover{
+        background-color: #4E4E4E;
+        color: white;
+    }
+   
+    .column-right {
+        padding-left: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        box-sizing: border-box;
+        width: 80%;
+    }
+    ul {
+        width: 95%;
+    }
+    li {
+        list-style: none;
+        font-size: calc(0.7rem + (10 * ((100vw - 467px) / 1600)));
+        padding-left: 2px;
+    }
+    #origin {
+        margin-top: 20px;
+    }
+    #origin-destination {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #origin-destination-background {
+        width: 5%;
+        height: 45px;
+        background-image: url('./../../images/card-image.png');
+        background-size: contain;
+        background-position-x: center;
+        background-position-y: center;
+        background-repeat: no-repeat;
+    }
+    th {
+        font-weight: normal;
+        padding-right: 10px;
+    }
+    td {
+        font-weight: bold;
+        padding-right: 10px;
+    }
+    .flex {
+        display: flex;
+        justify-content: center;
+    }
+    button {
+        color: black;
+        width: 100%;
+    }
+
+    @media only screen and (min-width: 1170px) {
+        #origin-destination-background {
+            width: 5%;
+            height: 60px;
+            background-image: url('./../../images/card-image.png');
+            background-size: contain;
+            background-position-x: center;
+            background-position-y: center;
+            background-repeat: no-repeat;
+        }
+        #price {
+            margin-top: 10%;
+            margin-left: 10%;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        #accept {
+            margin-bottom: 10%;
+            margin-left: 10%;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .card {
+            width: 50%;
+        }
+        #price {
+            margin-top: 30%;
+            margin-left: 10%;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        #accept {
+            margin-bottom: 30%;
+            margin-left: 10%;
+            font-size: 25px;
+            font-weight: bold;
+        }
+    }
+}
