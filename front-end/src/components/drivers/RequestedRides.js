@@ -24,7 +24,7 @@ export default class RequestedRides extends Component {
   render() {
     var requestedRides = this.state.rides.map((ride) => 
     <ul style={{color: `white`}}>
-        <li>Requested by: USERSNAME</li>
+        <li>Requested by: {ride.drinkerName}</li>
         <li>Origin: {ride.originAdress}</li>
         <li>Destination: {ride.destinationAdress}</li>
         <li>Est. Price: {ride.priceOfRide}</li>

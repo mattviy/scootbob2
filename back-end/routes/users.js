@@ -71,8 +71,9 @@ router.post("/drinker", (req,res) => {
             if (match){
               debugger
             res.cookie('loggedIn', 'true', {signed: true});
-            res.cookie('type', 'drinker', {signed: true})
-            res.cookie('name', name, {signed: true})
+            res.cookie('type', 'drinker', {signed: true});
+            res.cookie('name', name, {signed: true});
+            res.cookie('drinkerId', id, {signed: true});
             res.send({loggedIn: true, type: 'drinker', name: name, id: id});
             }
           else{

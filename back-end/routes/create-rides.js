@@ -15,7 +15,8 @@ router.post('/', (req, res, err) => {
     var destinationGeoCode = req.body.destinationLat + ", " + req.body.destinationLng;
     debugger
     rides.create({
-        _id: req.cookies.drinkerId,
+        _drinkerid: req.signedCookies.drinkerId,
+        drinkerName: req.signedCookies.name,
         originGeoCode: originGeoCode,
         destinationGeoCode: destinationGeoCode,
         originAdress: req.body.originAdress,
