@@ -13,9 +13,9 @@ var rides = require('../models/rides');
 router.post('/', (req, res, err) => {
     var originGeoCode = req.body.originLat + ", " + req.body.originLng;
     var destinationGeoCode = req.body.destinationLat + ", " + req.body.destinationLng;
-    debugger
+    var drinkerId = mongoose.Types.ObjectId(req.signedCookies.drinkerId);
     rides.create({
-        _id: req.cookies.drinkerId,
+        drinkerName: req.signedCookies.name,
         originGeoCode: originGeoCode,
         destinationGeoCode: destinationGeoCode,
         originAdress: req.body.originAdress,
@@ -25,7 +25,8 @@ router.post('/', (req, res, err) => {
         durationText: req.body.durationText,
         durationValue: req.body.durationValue,
         priceOfRide: req.body.priceOfRide,
-        rideStatus: req.body.rideStatus
+        rideStatus: req.body.rideStatus,
+        drinker: drinkerId,
       })
       .then((result)=>{
       console.log(result)
@@ -34,5 +35,18 @@ router.post('/', (req, res, err) => {
         if (err) console.log("Error: " + err)
       })
     });
+
+  router.post('/update-ride', (req, res, err) => {
+    var driverId = mongoose.Types.ObjectId(req.signedCookies.driverId);
+    console.log(driverId)
+    rides.update( { _id : req.body._id }, { rideStatus: "Accepted", driver: driverId }, function (err, raw) {
+      if (err) {
+        console.log(err)
+      }
+      debugger
+      res.send(raw)
+      console.log('The raw response from Mongo was ', raw);    
+      });
+    })
 
 module.exports = router; 

@@ -33,7 +33,7 @@ export default class NavbarLog extends Component {
                     <NavLink exact={true} activeClassName='is-active' className="hvr-underline-from-left" to="/Contact">Contact</NavLink>
                 </li>
                 <li key="logout" className="navbar-item">
-                    <a style={{"cursor": "pointer"}} className="hvr-underline-from-left" onClick={this.props.logout}>Log Out</a>
+                    <a href={"/"} style={{"cursor": "pointer"}} className="hvr-underline-from-left" onClick={this.props.logout}>Log Out</a>
                 </li>
             </ul>
           </nav>
