@@ -4,7 +4,7 @@ var router = express.Router();
 Ride = require('../models/rides')
 /* GET home page. */
 router.get('/pending-rides', function(req, res) {
-  Ride.find({})
+  Ride.find({}).populate('drinker').exec()
   .then((result) => {
     debugger
     res.json(result);
