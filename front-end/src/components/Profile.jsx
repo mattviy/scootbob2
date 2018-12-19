@@ -15,8 +15,6 @@ import RequestedRides from './../components/drivers/RequestedRides'
       var profileDriver =  <RequestedRides>
                               <h1>{this.props.name}</h1>
                            </RequestedRides>
-
-debugger
             return (
               <div>
                 {this.props.loggedIn && this.props.type === "driver" ?  profileDriver 

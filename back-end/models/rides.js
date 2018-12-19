@@ -12,8 +12,9 @@ var requestedRides = mongoose.model('rides', new Schema({
     durationValue: Number,
     priceOfRide: Number,
     rideStatus: String,
-    drinkerInfo: [{ type: Schema.Types.ObjectId, ref: 'drinker'}]
-    // driver: [{ type: Schema.Types.ObjectId, ref: 'driver'}]
+    drinkerName: String,
+    drinker: { type: Schema.Types.ObjectId, ref: "drinker"},
+    driver: { type: Schema.Types.ObjectId, ref: "driver"}
 }),'rides')
 
 module.exports = requestedRides
