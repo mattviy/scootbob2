@@ -7,7 +7,9 @@ import RequestedRides from './../components/drivers/RequestedRides'
     render() {
       var profileDrinker = <div className="profile">
                               <div className="map">
-                                <DrinkerMap userId={this.props.id} getRide={this.props.getRide}/>
+                              <DrinkerMap userId={this.props.id} getRide={this.props.getRide}>
+                                <button>Hello</button>
+                              </DrinkerMap>
                               </div>
                             </div> 
       var profileDriver =  <RequestedRides>

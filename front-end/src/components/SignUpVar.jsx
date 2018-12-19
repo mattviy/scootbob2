@@ -11,7 +11,7 @@ const SignUpVar = (props) => {
     
     <div>
       <Form id={foundSignUp.id} change={props.change} submit={props.submitS}/>
-      {props.warningSignUp}
+      <div className="warning">{props.warningSignUp}</div> 
     </div>
   )}
 

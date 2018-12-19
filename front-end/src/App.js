@@ -10,10 +10,10 @@ import Profile from './components/Profile';
 import Contact from './components/Contact';
 import About from './components/About';
 import Ride from './components/Ride';
-// import Account from './components/Account';
-// import Logout from './components/Logout';
-import './App.css'
+import dropdown from './components/dropdown'
+import './App.scss'
 import axios from 'axios';
+
 
 class App extends Component {
 
@@ -71,23 +71,23 @@ switchOffNotification = () => {
 }
 
  signupForm = (props) => {
-  axios(`http://localhost:3001/signup/${props.currentTarget.id}`, {
-    withCredentials: true,
-    method: "POST",
-    data: {
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-    } 
-  })
+    axios(`http://localhost:3001/signup/${props.currentTarget.id}`, {
+      withCredentials: true,
+      method: "POST",
+      data: {
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+      } 
+    })
     .then((result)=> {
       if (result.data.confirmation.length > 0) {
           this.setState({confirmation: result.data.confirmation}, this.switchOffNotification())
           this.props.history.push(`/LogIn/${result.data.type}`)
       } else {
-          this.setState({warningSign: result.data.warning }, this.switchOffNotification())
+          this.setState({warningSign: result.data.warning}, this.switchOffNotification())
           this.props.history.push(`/SignUp/${result.data.type}`)
       } 
     })

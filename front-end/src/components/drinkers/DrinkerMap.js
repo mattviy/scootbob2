@@ -17,9 +17,9 @@ render() {
     const DirectionsComponent = compose(
       withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${key}&v=3.exp&libraries=geometry,drawing,places`,
-        loadingElement: <div style={{ height: `81vh` }} />,
-        containerElement: <div style={{ height: `81vh` }} />,
-        mapElement: <div style={{ height: `81vh`}} />,
+        loadingElement: <div style={{ height: `100vh` }} />,
+        containerElement: <div style={{ height: `100vh` }} />,
+        mapElement: <div style={{ height: `100vh`}} />,
       }),
       withScriptjs,
       withGoogleMap,
@@ -336,6 +336,7 @@ render() {
       }}
       >
       <SearchBox
+            controlPosition={window.google.maps.ControlPosition.BOTTOM_LEFT}
             ref={props.onSearchBoxMounted}  
             bounds={props.bounds}
             controlPosition={google.maps.ControlPosition.TOP_LEFT}
@@ -391,7 +392,6 @@ render() {
               }}
             />
           </SearchBox>
-          <button onClick={props.createRide}>CONFIRM</button>
           <RideDetails distanceValue={props.distanceValue} durationValue={props.durationValue} priceOfRide={props.priceOfRide}/>
         {props.directions && <DirectionsRenderer directions={props.directions} suppressMarkers={props.markers}/>}
       </GoogleMap>)
