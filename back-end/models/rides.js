@@ -12,7 +12,6 @@ var requestedRides = mongoose.model('rides', new Schema({
     durationValue: Number,
     priceOfRide: Number,
     rideStatus: String,
-    _id: Schema.Types.ObjectId,
     drinkerInfo: [{ type: Schema.Types.ObjectId, ref: 'drinker'}]
     // driver: [{ type: Schema.Types.ObjectId, ref: 'driver'}]
 }),'rides')

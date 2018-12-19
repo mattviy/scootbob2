@@ -3,7 +3,7 @@ import React from 'react'
 
 const Form = (props) => {
   return (
-    <div className="form">  
+    <div className="formSign">  
     <h1>{props.id}</h1>
       <input onChange={props.change} placeholder="First Name" type="text" name="firstName"/>
       <input onChange={props.change} placeholder="Last Name" type="text" name="lastName"/>
