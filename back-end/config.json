@@ -1,6 +1,7 @@
 {
-    
+
     "apiKey" : "AIzaSyCvUqSRy6gnZvoe2ImezmmQc2ogd7rLFMQ",
     "baseUrl": "http://142.93.237.105",
-    "environment" : "production"
+    "environment" : "production",
+    "port": "80"
 }
