@@ -18,7 +18,7 @@ const emailDrinker = function(link,text) {
       <mj-column vertical-align="middle" width="100%">
         <mj-text align="left" color="#ffffff" font-size="22px" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px"><span style="color:#FEEB35"></span><br /><br /> Welcome to ScootBob,</mj-text>
         <mj-text align="left" color="#ffffff" font-size="15px" line-height= "30px" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px"> ${text} </mj-text>
-       <mj-text> <form action="http://localhost:3001/confirmation/drinker" method="post"><input name="token" value="${link}" style="display: none;"> <button style=" font-size: 22px; border: 2px solid black; padding: 10px; font-weight: bold; background-color: #000000; border-radius: 10px; color: yellow; font-family: open Sans Helvetica, Arial, sans-serif;"  type="submit">Login</button>
+       <mj-text> <form action="http://142.93.237.105:80/confirmation/drinker" method="post"><input name="token" value="${link}" style="display: none;"> <button style=" font-size: 22px; border: 2px solid black; padding: 10px; font-weight: bold; background-color: #000000; border-radius: 10px; color: yellow; font-family: open Sans Helvetica, Arial, sans-serif;"  type="submit">Login</button>
        </form> </mj-text>
         <mj-text align="left" color="#ffffff" font-size="15px" font-family="open Sans Helvetica, Arial, sans-serif" padding-left="25px" padding-right="25px">Thanks, <br /> <br/> The ScootBob Team</mj-text>
       </mj-column>
