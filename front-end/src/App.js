@@ -36,19 +36,15 @@ class App extends Component {
 }
 
 componentWillMount(){
-  
   axios(`${apiConfig.baseUrl}/cookies`, {withCredentials: true})
   .then((result)=> {
-    
     result.data.loggedIn ? this.setState({loggedIn: true, type: result.data.type, name: result.data.name}) : this.setState({loggedIn: false})
-    
   })
 }
 
 logout = () => {
   axios(`${apiConfig.baseUrl}/logout`, {withCredentials: true})
   .then((result)=> {
-    
     this.setState({loggedIn: result.data.loggedIn})
   })
   .catch((err)=>{
@@ -113,12 +109,9 @@ switchOffNotification = () => {
         } 
       })
       .then((result)=> {
-        
           if (result.data.loggedIn) {
-            
               this.setState({loggedIn: true, type: result.data.type, name: result.data.name, id: result.data.id })
               this.props.history.push(`/Profile/${result.data.type}/${result.data.name}`) 
-              
           }
            else  {
               this.setState({warning: result.data.warning}, this.switchOffNotification())
