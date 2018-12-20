@@ -25,9 +25,12 @@ const LogInVar = props => {
             <div className="box"><p className="message">Not registered?</p><Link className="noRegister" to={{pathname: `/SignUp/${foundLogIn.id}`}}>Create an account</Link></div>
           </form>
         </div>
-    </div>
+        <p className="warning">
     {props.confirmation}
     {props.warning}
+    </p>
+    </div>
+    
   </div>
   )
 }

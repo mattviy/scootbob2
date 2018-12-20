@@ -10,6 +10,7 @@ html {
   height: 100%;
 }
 
+
 #root {
   height: 100%;
 }
@@ -132,6 +133,7 @@ html {
     max-width: 70vw;
     border-radius: 5px;
     border: 3px solid rgba(255,255,255,0.5);
+    
 
     img{
       color: white;
@@ -151,12 +153,14 @@ html {
 
   h1 {
     font-size: 3rem;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
     padding-bottom: 5px;
     color: white;
     position: relative;
     left: 0.5%;
     text-transform: uppercase;
+    text-shadow: -4px 3px 0 #525e63;
+
   }
 
   .buttons {
@@ -179,6 +183,7 @@ html {
     background-color: #525e63;
     margin-bottom: 35px;
     max-width: 20vw;
+    z-index: 1;
 
     &__text {
       display: block;
@@ -274,6 +279,13 @@ html {
   }
 }
 
+.warning{
+  max-width: 80vw;
+  color: white;
+}
+
+
+
 @media only screen and (min-width: 250px) and (max-width: 767px) {
 
   .conceptContainer {
@@ -293,7 +305,9 @@ html {
   .containerFlex{
     height: 100%;
   }
+}
 
+@media only screen and (max-width: 1200px) {
   .loginDiv{
 
     .buttons {
@@ -302,9 +316,9 @@ html {
     }
 
     .loginContainer{
-      margin: 0 0 20px 0;
+      margin: 30px 0 20px 0;
       max-width: 45vw;
-
+      height: 300px
     }
 
     .button{
@@ -312,13 +326,9 @@ html {
 
       
     }
-
-
-    .loginContainer{
-      height: 300px
+    h1{
+      margin-bottom: 0px;
     }
   }
  
-
 }
-

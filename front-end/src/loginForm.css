@@ -20,14 +20,15 @@
   flex-flow: column nowrap;
   justify-content: center;
   max-width: 80vw;
-  height: 85%;
+  height: 100%;
 }
 
 .login-page > h1 {
  display: block;
- color: #171A21;
+ color: white;
  margin-bottom: 25px;
  font-size: calc(2.2rem + (30 * ((100vw - 467px) / 1600)));
+ text-shadow: -4px 3px 0 #525e63;
 }
 
 .noRegister{
@@ -49,9 +50,9 @@
 .form {
   position: relative;
   z-index: 1;
-  background: #171A21;
+  background:black;
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 0 auto 30px;
   padding: 45px 45px 30px 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
