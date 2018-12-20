@@ -8,11 +8,10 @@ const SignUpVar = (props) => {
     )}
   const foundSignUp = driverDrinker(props.match.params.id);
   return (
-    
-    <div>
-      <Form id={foundSignUp.id} change={props.change} submit={props.submitS}/>
-      <div className="warning">{props.warningSignUp}</div> 
-    </div>
+    <React.Fragment>
+      <Form id={foundSignUp.id} warning={props.warningSignUp} change={props.change} submit={props.submitS}/>
+     </React.Fragment>
+      
   )}
 
 

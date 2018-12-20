@@ -10,8 +10,8 @@ import Profile from './components/Profile';
 import Contact from './components/Contact';
 import About from './components/About';
 import Ride from './components/Ride';
-import dropdown from './components/dropdown'
 import './App.scss'
+import './signupCss.scss'
 import axios from 'axios';
 
 
