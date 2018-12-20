@@ -14,6 +14,8 @@ import './App.scss'
 import './signupCss.scss'
 import axios from 'axios';
 
+import apiConfig from './config.json'
+
 
 class App extends Component {
 
@@ -35,7 +37,7 @@ class App extends Component {
 
 componentWillMount(){
   
-  axios('http://localhost:3001/cookies', {withCredentials: true})
+  axios(`${apiConfig.baseUrl}/cookies`, {withCredentials: true})
   .then((result)=> {
     
     result.data.loggedIn ? this.setState({loggedIn: true, type: result.data.type, name: result.data.name}) : this.setState({loggedIn: false})
@@ -44,7 +46,7 @@ componentWillMount(){
 }
 
 logout = () => {
-  axios('http://localhost:3001/logout', {withCredentials: true})
+  axios(`${apiConfig.baseUrl}/logout`, {withCredentials: true})
   .then((result)=> {
     
     this.setState({loggedIn: result.data.loggedIn})
@@ -71,7 +73,7 @@ switchOffNotification = () => {
 }
 
  signupForm = (props) => {
-    axios(`http://localhost:3001/signup/${props.currentTarget.id}`, {
+    axios(`${apiConfig.baseUrl}/signup/${props.currentTarget.id}`, {
       withCredentials: true,
       method: "POST",
       data: {
@@ -102,8 +104,7 @@ switchOffNotification = () => {
 
   submitForm = (e) => {
     e.preventDefault();
-    
-      axios(`http://localhost:3001/users/${e.currentTarget.id}`, {
+      axios(`${apiConfig.baseUrl}/users/${e.currentTarget.id}`, {
         withCredentials: true,
         method: "POST",
         data: {

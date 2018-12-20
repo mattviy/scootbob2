@@ -8,7 +8,9 @@
   font-family: 'Share Tech Mono';
   font-size: 1.3rem;
   margin: 0;
+  position: absolute;
   border-bottom: 1px solid rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 .navbar ul > li {

@@ -7,6 +7,8 @@ bodyParser = require('body-parser');
 var cors = require("cors");
 var mongoose = require("mongoose");
 
+const config = require('./config.json')
+
 mongoose.connect('mongodb://localhost/scooter',  { useNewUrlParser: true }, (err) => {
 err ? console.log("Not connected to the database, cause: " + err) : console.log("Succesfully connected to MongoDB")
 })
@@ -42,7 +44,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser("secret"));
-app.use(express.static(path.join(__dirname, 'public')));
+
+if (config.environment === "production") {
+  console.log("production");
+  app.use(express.static(path.join(__dirname, "build")));
+  app.get("/", function(req, res) {
+    res.sendFile(path.join(__dirname, "build"));
+  });
+
+  app.get("*", function(req, res) {
+    res.redirect(config.backend);
+  });
+}
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

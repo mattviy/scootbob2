@@ -6,8 +6,7 @@ import axios from "axios"
 import RideDetails from './RideDetails';
 import './DrinkerMap.scss';
 
-const apiConfig = require('../../config.js');
-
+import apiConfig from '../../config.json'
 const key = apiConfig.apiKey; 
 
 const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox");
@@ -66,7 +65,7 @@ render() {
           if (this.state.oAdress !== "" && this.state.dAdress !== "" ) {
           axios({
             method: 'post',
-            url: 'http://localhost:3001/create-rides', 
+            url: `${apiConfig.baseUrl}/create-rides`, 
             withCredentials: true,
             data: {
               originLat: this.state.oLat,
@@ -337,7 +336,6 @@ render() {
       }}
       >
       <SearchBox
-            controlPosition={window.google.maps.ControlPosition.BOTTOM_LEFT}
             ref={props.onSearchBoxMounted}  
             bounds={props.bounds}
             controlPosition={google.maps.ControlPosition.TOP_LEFT}
@@ -355,7 +353,7 @@ render() {
                 width: `90%`,
                 height: `40px`,
                 marginLeft: `5%`,
-                marginTop: `60px`,
+                marginTop: `120px`,
                 padding: `0 12px`,
                 borderRadius: `3px`,
                 boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,
@@ -383,7 +381,7 @@ render() {
                 width: `90%`,
                 height: `40px`,
                 marginRight: `5%`,
-                marginTop: `120px`,
+                marginTop: `180px`,
                 padding: `0 12px`,
                 borderRadius: `3px`,
                 boxShadow: `0 2px 6px rgba(0, 0, 0, 0.3)`,

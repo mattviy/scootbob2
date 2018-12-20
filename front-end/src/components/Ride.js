@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-export default class Ride extends Component {
+import apiConfig from './../config.json';
 
+export default class Ride extends Component {
   state ={
     rides: {}
   }
   
   componentWillMount(){
-    axios('http://localhost:3001/get-rides',
+    axios(`${apiConfig.baseUrl}/get-rides`,
       {withCredentials: true,
       data: this.props.id,
       method: 'post'

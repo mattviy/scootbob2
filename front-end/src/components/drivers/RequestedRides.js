@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import './Requestedrides.scss';
+import apiConfig from '../../config.json'
 
 export default class RequestedRides extends Component {
   state = {
@@ -14,7 +15,7 @@ export default class RequestedRides extends Component {
   componentWillMount() {
     axios({
       method:'get',
-      url:'http://localhost:3001/api/pending-rides',
+      url:`${apiConfig.baseUrl}/api/pending-rides`,
       responseType:'json'
     })
     .then((result) => {
@@ -29,7 +30,7 @@ export default class RequestedRides extends Component {
     var state = this.state
     axios({
       method: 'post',
-      url: 'http://localhost:3001/create-rides/update-ride', 
+      url: `${apiConfig.baseUrl}/create-rides/update-ride`, 
       withCredentials: true,
       data: {
         _id: rideId
