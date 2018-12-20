@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import './RideDetails.scss';
 
 export default class RideDetails extends Component {
   render() {
     return (
-      <div>
+      <div className="RideDetails">
           <div className="info-box">
             <div><b>km </b><span id="in_kilo">{this.props.distanceValue}</span></div>
           </div>
