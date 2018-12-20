@@ -4,6 +4,7 @@ import  { compose, withProps, lifecycle } from 'recompose'
 import {withScriptjs, withGoogleMap, GoogleMap, DirectionsRenderer} from 'react-google-maps'
 import axios from "axios"
 import RideDetails from './RideDetails';
+import './DrinkerMap.scss';
 
 const apiConfig = require('../../config.js');
 
@@ -17,9 +18,9 @@ render() {
     const DirectionsComponent = compose(
       withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${key}&v=3.exp&libraries=geometry,drawing,places`,
-        loadingElement: <div style={{ height: `92vh` }} />,
-        containerElement: <div style={{ height: `92vh` }} />,
-        mapElement: <div style={{ height: `92vh`}} />,
+        loadingElement: <div style={{ height: `91vh` }} />,
+        containerElement: <div style={{ height: `91vh` }} />,
+        mapElement: <div style={{ height: `91vh`}} />,
       }),
       withScriptjs,
       withGoogleMap,
@@ -393,7 +394,9 @@ render() {
             />
           </SearchBox>
           <RideDetails distanceValue={props.distanceValue} durationValue={props.durationValue} priceOfRide={props.priceOfRide}/>
-          <button onClick={this.createRide}>Confirm</button>
+          <div className="confirmation" onClick={props.createRide}>
+            <div className="confirmation-btn">CONFIRM</div>
+          </div>
           {props.directions && <DirectionsRenderer directions={props.directions} suppressMarkers={props.markers}/>}
       </GoogleMap>)
     });

@@ -1,0 +1,22 @@
+.confirmation {
+    .confirmation-btn {
+    box-sizing: border-box;
+    width: 100%;
+    height: 5vh;
+    padding-top: 12px;
+    vertical-align: middle;
+    border-top: 1px solid black;   
+    color: black;
+    background-color: white;
+    text-align: center; 
+    vertical-align: middle;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    }
+    .confirmation-btn:hover {
+        background-color: #4E4E4E;
+        color: white;
+    }
+
+   
+}
