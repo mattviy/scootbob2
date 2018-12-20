@@ -47,9 +47,9 @@ app.use(cookieParser("secret"));
 
 if (config.environment === "production") {
   console.log("production");
-  app.use(express.static(path.join(__dirname, "build")));
+  app.use(express.static(path.join(__dirname, "react-client")));
   app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "build"));
+    res.sendFile(path.join(__dirname, "react-client"));
   });
 
   app.get("*", function(req, res) {
