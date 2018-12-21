@@ -50,8 +50,8 @@ $anim-text-offset: 1em;
     
     ::placeholder{
       color: white;
-      
     }
+
     .button {
       -webkit-touch-callout: none;
       user-select: none;
@@ -236,11 +236,27 @@ $anim-text-offset: 1em;
 }
 
 @media only screen and (max-width: 780px) {
-.signupContainer{
+  .signupContainer{    
+    justify-content: center;
 
-  .containerAll{
-    display: flex;
-    flex-direction: column;
+    .containerAll{
+      display: flex;
+      flex-direction: column-reverse;
+
+      .whysign{
+        width: 350px;
+        padding-right: 10px;
+        height: 300px;
+        text-align: center;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        
+        p{
+          width: 80%;
+          max-width: 60vw;
+        }
+      }
+    }
   }
-}
 }
