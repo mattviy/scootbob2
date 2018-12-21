@@ -14,9 +14,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post("/driver", (req,res) => {
-  
   Driver.find({email: req.body.email}, function(err, Driver){
-   
     if (Driver.length > 0) {
       var name = `${Driver[0].firstName[0]}. ${Driver[0].lastName}`
       var id  = Driver[0]._id
@@ -31,6 +29,7 @@ router.post("/driver", (req,res) => {
        
           bcrypt.compare(password, Driver[0].password)
           .then((match) => {
+            debugger
             if (match){
               debugger
               res.cookie('loggedIn', 'true', {signed: true});
@@ -56,13 +55,11 @@ router.post("/driver", (req,res) => {
 })
 
 router.post("/drinker", (req,res) => {
-  
   Drinker.find({email: req.body.email}, function(err, Drinker){
     if (Drinker.length > 0) {
       var name = `${Drinker[0].firstName[0]}. ${Drinker[0].lastName}`
       var id  = Drinker[0]._id
       if (Drinker[0].isVerified != true) { 
-        
         res.send({warning: 'Your e-mail is not verified yet, check the inbox of your mail for the verification e-mail',
                   loggedIn: false})
       }
@@ -70,7 +67,6 @@ router.post("/drinker", (req,res) => {
         var password = req.body.password;
           bcrypt.compare(password, Drinker[0].password).then((match) => {
             if (match){
-              debugger
             res.cookie('loggedIn', 'true', {signed: true});
             res.cookie('type', 'drinker', {signed: true});
             res.cookie('name', name, {signed: true});

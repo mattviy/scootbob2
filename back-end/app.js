@@ -16,7 +16,7 @@ err ? console.log("Not connected to the database, cause: " + err) : console.log(
 app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'http://localhost:3001',
   credentials: true
 }))
 

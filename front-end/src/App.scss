@@ -31,6 +31,12 @@ html {
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   position: absolute;
 
+.warning{
+  max-width: 80vw;
+  color: white;
+}
+
+
   ul > li {
     display: inline;
   }
@@ -40,6 +46,7 @@ html {
     margin-right: 25px;
     color: #e6e6e6;
     font-weight: 900;
+    font-size: calc(1rem + (7 * ((100vw - 467px) / 1600))) 
   }
 
   ul > li > a:focus {
